@@ -18,25 +18,26 @@ public class JpaMain {
         tx.begin();
 
         try { // ctrl + alt + t
-           /* Member member = new Member();
-            member.setId(2L);
-            member.setName("HelloB");
-            em.persist(member); */
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-           /* Member findMember = em.find(Member.class, 1L); // 조회
-            findMember.setName("HelloJPA");*/
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
 
-            /*em.remove(findMember); // 삭제*/
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
 
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(2)
-                    .getResultList();
+            // 새로운 팀B
+            Team teamB = new Team();
+            teamB.setName("TeamB");
+            em.persist(teamB);
 
-            for (Member member : result){
-                // sout + tab -> syso 완성
-                System.out.println("member.name = " + member.getName());
-            }
+            // 회원1에 새로운 팀B 설정
+            member.setTeam(teamB);
 
             tx.commit();
         } catch (Exception e) {
