@@ -1,9 +1,6 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +8,12 @@ import java.util.List;
 public class Product {
 
     @Id @GeneratedValue
+    @Column(name = "PRODUCT_ID")
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "product")
+    /*@OneToMany(mappedBy = "product")
     private List<Order> orders = new ArrayList<>();
-
+*/
 }
